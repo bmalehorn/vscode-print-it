@@ -1,131 +1,11 @@
-"use strict";
-
+// The module 'vscode' contains the VS Code extensibility API
+// Import the module and reference it with the alias vscode in your code below
 import * as vscode from "vscode";
 
-let currentEditor: vscode.TextEditor;
-
-export function activate(context: vscode.ExtensionContext) {
-  currentEditor = vscode.window.activeTextEditor;
-
-  vscode.window.onDidChangeActiveTextEditor(
-    (editor) => (currentEditor = editor)
-  );
-
-  context.subscriptions.push(
-    vscode.commands.registerTextEditorCommand(
-      "console.log.wrap.nameValue",
-      (editor, edit) => handle(Wrap.Down, true, "nameValue")
-    )
-  );
-  context.subscriptions.push(
-    vscode.commands.registerTextEditorCommand(
-      "console.log.wrap.name",
-      (editor, edit) => handle(Wrap.Down, true, "name")
-    )
-  );
-  context.subscriptions.push(
-    vscode.commands.registerTextEditorCommand(
-      "console.log.wrap.arguments",
-      (editor, edit) => handle(Wrap.Down, true, "arguments")
-    )
-  );
-  context.subscriptions.push(
-    vscode.commands.registerTextEditorCommand(
-      "console.log.wrap.get",
-      (editor, edit) => handle(Wrap.Down, true, "get")
-    )
-  );
-}
-
-function handle(target: Wrap, prefix?: boolean, type?: string) {
-  new Promise((resolve, reject) => {
-    console.log("type", type);
-    let sel = currentEditor.selection;
-    let len = sel.end.character - sel.start.character;
-
-    let ran =
-      len == 0
-        ? currentEditor.document.getWordRangeAtPosition(sel.anchor)
-        : new vscode.Range(sel.start, sel.end);
-
-    if (ran == undefined) {
-      reject("NO_WORD");
-    } else {
-      let doc = currentEditor.document;
-      let lineNumber = ran.start.line;
-      let item = doc.getText(ran);
-
-      let idx = doc.lineAt(lineNumber).firstNonWhitespaceCharacterIndex;
-      let ind = doc.lineAt(lineNumber).text.substring(0, idx);
-      const funcName = getSetting("functionName");
-      let wrapData = {
-        txt: getSetting("functionName"),
-        item: item,
-        doc: doc,
-        ran: ran,
-        idx: idx,
-        ind: ind,
-        line: lineNumber,
-        sel: sel,
-        lastLine: doc.lineCount - 1 == lineNumber,
-      };
-      const semicolon = getSetting("useSemicolon") ? ";" : "";
-      if (type === "nameValue") {
-        wrapData.txt =
-          funcName +
-          "('".concat(wrapData.item, "', ", wrapData.item, ")", semicolon);
-      } else if (type === "arguments") {
-        wrapData.txt =
-          funcName +
-          "('".concat(wrapData.item, "', ", "arguments", ")", semicolon);
-      } else if (type === "get") {
-        wrapData.txt = "const aaa = get(".concat(
-          wrapData.item,
-          ", '",
-          "aaa",
-          "', '')",
-          semicolon
-        );
-      } else {
-        wrapData.txt = funcName + "('".concat(wrapData.item, "')", semicolon);
-      }
-      resolve(wrapData);
-    }
-  })
-    .then((wrap: WrapData) => {
-      let nxtLine: vscode.TextLine;
-      let nxtLineInd: string;
-
-      if (!wrap.lastLine) {
-        nxtLine = wrap.doc.lineAt(wrap.line + 1);
-        nxtLineInd = nxtLine.text.substring(
-          0,
-          nxtLine.firstNonWhitespaceCharacterIndex
-        );
-      } else {
-        nxtLineInd = "";
-      }
-      currentEditor
-        .edit((e) => {
-          e.insert(
-            new vscode.Position(
-              wrap.line,
-              wrap.doc.lineAt(wrap.line).range.end.character
-            ),
-            "\n".concat(nxtLineInd > wrap.ind ? nxtLineInd : wrap.ind, wrap.txt)
-          );
-        })
-        .then(() => {
-          currentEditor.selection = wrap.sel;
-        });
-    })
-    .catch((message) => {
-      console.log("vscode-wrap-console REJECTED_PROMISE : " + message);
-    });
-}
-
-function getSetting(setting: string) {
-  return vscode.workspace.getConfiguration("wrap-console-log-simple")[setting];
+enum Wrap {
+  Inline,
+  Down,
+  Up,
 }
 
 interface WrapData {
@@ -140,12 +20,123 @@ interface WrapData {
   lastLine: boolean;
 }
 
-enum Wrap {
-  Inline,
-  Down,
-  Up,
+// this method is called when your extension is activated
+// your extension is activated the very first time the command is executed
+export function activate(context: vscode.ExtensionContext) {
+  // Use the console to output diagnostic information (console.log) and errors (console.error)
+  // This line of code will only be executed once when your extension is activated
+  console.log('Congratulations, your extension "print-it" is now active!');
+
+  // The command has been defined in the package.json file
+  // Now provide the implementation of the command with registerCommand
+  // The commandId parameter must match the command field in package.json
+  let disposable = vscode.commands.registerCommand(
+    "print-it.helloWorld",
+    () => {
+      // The code you place here will be executed every time your command is executed
+
+      // Display a message box to the user
+      vscode.window.showInformationMessage("Hello World from Print It!");
+    }
+  );
+
+  context.subscriptions.push(
+    vscode.commands.registerTextEditorCommand(
+      "print-it.nameValue",
+      (editor, edit) => handle(Wrap.Down, true, "nameValue")
+    )
+  );
+
+  context.subscriptions.push(disposable);
 }
 
-export function deactivate() {
-  return undefined;
+// this method is called when your extension is deactivated
+export function deactivate() {}
+
+async function handle(target: Wrap, prefix?: boolean, type?: string) {
+  const currentEditor = vscode.window.activeTextEditor;
+  if (!currentEditor) {
+    return;
+  }
+  let sel = currentEditor.selection;
+  let len = sel.end.character - sel.start.character;
+  let wrapData: WrapData;
+
+  let ran =
+    len === 0
+      ? currentEditor.document.getWordRangeAtPosition(sel.anchor)
+      : new vscode.Range(sel.start, sel.end);
+
+  if (ran === undefined) {
+    throw new Error("NO_WORD");
+  } else {
+    let doc = currentEditor.document;
+    let lineNumber = ran.start.line;
+    let item = doc.getText(ran);
+
+    let idx = doc.lineAt(lineNumber).firstNonWhitespaceCharacterIndex;
+    let ind = doc.lineAt(lineNumber).text.substring(0, idx);
+    const funcName = getSetting("functionName");
+    wrapData = {
+      txt: getSetting("functionName"),
+      item: item,
+      doc: doc,
+      ran: ran,
+      idx: idx,
+      ind: ind,
+      line: lineNumber,
+      sel: sel,
+      lastLine: doc.lineCount - 1 === lineNumber,
+    };
+    const semicolon = getSetting("useSemicolon") ? ";" : "";
+    if (type === "nameValue") {
+      wrapData.txt =
+        funcName +
+        "('".concat(wrapData.item, "', ", wrapData.item, ")", semicolon);
+    } else if (type === "arguments") {
+      wrapData.txt =
+        funcName +
+        "('".concat(wrapData.item, "', ", "arguments", ")", semicolon);
+    } else if (type === "get") {
+      wrapData.txt = "const aaa = get(".concat(
+        wrapData.item,
+        ", '",
+        "aaa",
+        "', '')",
+        semicolon
+      );
+    } else {
+      wrapData.txt = funcName + "('".concat(wrapData.item, "')", semicolon);
+    }
+  }
+  let nxtLine: vscode.TextLine;
+  let nxtLineInd: string;
+
+  if (!wrapData.lastLine) {
+    nxtLine = wrapData.doc.lineAt(wrapData.line + 1);
+    nxtLineInd = nxtLine.text.substring(
+      0,
+      nxtLine.firstNonWhitespaceCharacterIndex
+    );
+  } else {
+    nxtLineInd = "";
+  }
+  await currentEditor.edit((e) => {
+    e.insert(
+      new vscode.Position(
+        wrapData.line,
+        wrapData.doc.lineAt(wrapData.line).range.end.character
+      ),
+      "\n".concat(
+        nxtLineInd > wrapData.ind ? nxtLineInd : wrapData.ind,
+        wrapData.txt
+      )
+    );
+  });
+
+  currentEditor.selection = wrapData.sel;
+}
+
+function getSetting(setting: string) {
+  return vscode.workspace.getConfiguration("wrap-console-log-simple")[setting];
 }

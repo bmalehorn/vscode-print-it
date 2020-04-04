@@ -10,7 +10,8 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:print-it.helloWorld"
+    "onCommand:print-it.helloWorld",
+    "*"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -18,6 +19,17 @@
       {
         "command": "print-it.helloWorld",
         "title": "Hello World"
+      },
+      {
+        "command": "print-it.nameValue",
+        "title": "print-it.nameValue"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "print-it.nameValue",
+        "key": "ctrl+shift+u",
+        "when": "editorTextFocus"
       }
     ]
   },
