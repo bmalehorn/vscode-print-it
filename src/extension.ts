@@ -1,5 +1,3 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from "vscode";
 
 interface WrapData {
@@ -88,6 +86,8 @@ async function printIt() {
   currentEditor.selection = wrapData.sel;
 }
 
+// TODO: per-languages escape code, not JSON.stringify
+// TODO: configure wrapping function per-language
 function wrap(selection: string, languageId: string): string {
   switch (languageId) {
     case "python":

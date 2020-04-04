@@ -1,65 +1,26 @@
-# print-it README
+# VSCode Print It
 
-This is the README for your extension "print-it". After writing up a brief description, we recommend including the following sections.
+[![version number](https://vsmarketplacebadge.apphb.com/version-short/bmalehorn.print-it.svg)](https://marketplace.visualstudio.com/items?itemName=bmalehorn.print-it)
+[![install count](https://vsmarketplacebadge.apphb.com/installs-short/bmalehorn.print-it.svg)](https://marketplace.visualstudio.com/items?itemName=bmalehorn.print-it)
 
-## Features
+Add print statements in one keystroke!
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+`Alt + [`: wrap print statement
 
-For example if there is an image subfolder under your extension project workspace:
+## Demo
 
-\!\[feature X\]\(images/feature-x.png\)
+![demo](demo.gif)
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+## Supported Languages
 
-## Requirements
+| language                | example                                        |
+| ----------------------- | ---------------------------------------------- |
+| JavaScript / TypeScript | `console.log("variable", variable)`            |
+| Python                  | `print("variable", variable)`                  |
+| Ruby                    | `pp("variable", variable)`                     |
+| Go                      | `fmt.Printf("%s %#v\n", "variable", variable)` |
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+## Related Projects
 
-## Extension Settings
-
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
-This extension contributes the following settings:
-
-- `myExtension.enable`: enable/disable this extension
-- `myExtension.thing`: set to `blah` to do something
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Working with Markdown
-
-**Note:** You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-- Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-- Toggle preview (`Shift+CMD+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-- Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (macOS) to see a list of Markdown snippets
-
-### For more information
-
-- [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-- [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+- [Wrap Console Log Simple](https://marketplace.visualstudio.com/items?itemName=WooodHead.vscode-wrap-console-log-simple)
+- [Wrap Console Log](https://marketplace.visualstudio.com/items?itemName=midnightsyntax.vscode-wrap-console-log)

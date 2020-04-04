@@ -1,11 +1,11 @@
 {
   "name": "print-it",
   "displayName": "Print It",
-  "description": "Add a print statement for the current variable",
+  "description": "Wrap a print statment around current word or selection",
   "publisher": "bmalehorn",
   "license": "MIT",
   "repository": {
-    "url": "https://github.com/bmalehorn/vscode-fish"
+    "url": "https://github.com/bmalehorn/vscode-print-it"
   },
   "version": "0.0.1",
   "engines": {
