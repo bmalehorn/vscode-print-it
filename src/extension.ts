@@ -2,12 +2,6 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from "vscode";
 
-enum Wrap {
-  Inline,
-  Down,
-  Up,
-}
-
 interface WrapData {
   txt: string;
   item: string;
@@ -23,37 +17,15 @@ interface WrapData {
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
-  // Use the console to output diagnostic information (console.log) and errors (console.error)
-  // This line of code will only be executed once when your extension is activated
-  console.log('Congratulations, your extension "print-it" is now active!');
-
-  // The command has been defined in the package.json file
-  // Now provide the implementation of the command with registerCommand
-  // The commandId parameter must match the command field in package.json
-  let disposable = vscode.commands.registerCommand(
-    "print-it.helloWorld",
-    () => {
-      // The code you place here will be executed every time your command is executed
-
-      // Display a message box to the user
-      vscode.window.showInformationMessage("Hello World from Print It!");
-    }
-  );
-
   context.subscriptions.push(
-    vscode.commands.registerTextEditorCommand(
-      "print-it.nameValue",
-      (editor, edit) => handle(Wrap.Down, true, "nameValue")
-    )
+    vscode.commands.registerTextEditorCommand("print-it.PrintIt", printIt)
   );
-
-  context.subscriptions.push(disposable);
 }
 
 // this method is called when your extension is deactivated
 export function deactivate() {}
 
-async function handle(target: Wrap, prefix?: boolean, type?: string) {
+async function printIt() {
   const currentEditor = vscode.window.activeTextEditor;
   if (!currentEditor) {
     return;
@@ -69,46 +41,25 @@ async function handle(target: Wrap, prefix?: boolean, type?: string) {
 
   if (ran === undefined) {
     throw new Error("NO_WORD");
-  } else {
-    let doc = currentEditor.document;
-    let lineNumber = ran.start.line;
-    let item = doc.getText(ran);
-
-    let idx = doc.lineAt(lineNumber).firstNonWhitespaceCharacterIndex;
-    let ind = doc.lineAt(lineNumber).text.substring(0, idx);
-    const funcName = getSetting("functionName");
-    wrapData = {
-      txt: getSetting("functionName"),
-      item: item,
-      doc: doc,
-      ran: ran,
-      idx: idx,
-      ind: ind,
-      line: lineNumber,
-      sel: sel,
-      lastLine: doc.lineCount - 1 === lineNumber,
-    };
-    const semicolon = getSetting("useSemicolon") ? ";" : "";
-    if (type === "nameValue") {
-      wrapData.txt =
-        funcName +
-        "('".concat(wrapData.item, "', ", wrapData.item, ")", semicolon);
-    } else if (type === "arguments") {
-      wrapData.txt =
-        funcName +
-        "('".concat(wrapData.item, "', ", "arguments", ")", semicolon);
-    } else if (type === "get") {
-      wrapData.txt = "const aaa = get(".concat(
-        wrapData.item,
-        ", '",
-        "aaa",
-        "', '')",
-        semicolon
-      );
-    } else {
-      wrapData.txt = funcName + "('".concat(wrapData.item, "')", semicolon);
-    }
   }
+  let doc = currentEditor.document;
+  let lineNumber = ran.start.line;
+  let item = doc.getText(ran);
+
+  let idx = doc.lineAt(lineNumber).firstNonWhitespaceCharacterIndex;
+  let ind = doc.lineAt(lineNumber).text.substring(0, idx);
+  wrapData = {
+    txt: "",
+    item,
+    doc,
+    ran,
+    idx,
+    ind,
+    line: lineNumber,
+    sel,
+    lastLine: doc.lineCount - 1 === lineNumber,
+  };
+  wrapData.txt = wrap(wrapData.item, currentEditor.document.languageId);
   let nxtLine: vscode.TextLine;
   let nxtLineInd: string;
 
@@ -137,6 +88,24 @@ async function handle(target: Wrap, prefix?: boolean, type?: string) {
   currentEditor.selection = wrapData.sel;
 }
 
-function getSetting(setting: string) {
-  return vscode.workspace.getConfiguration("wrap-console-log-simple")[setting];
+function wrap(selection: string, languageId: string): string {
+  switch (languageId) {
+    case "python":
+      return `print(${JSON.stringify(selection)}, ${selection})`;
+    case "go":
+      return `fmt.Printf("%s %#v\\n", ${JSON.stringify(
+        selection
+      )}, ${selection})`;
+    case "ruby":
+      return `pp(${JSON.stringify(selection)}, ${selection})`;
+    case "shellscript":
+    case "fish":
+      return `echo ${JSON.stringify(selection)} ${selection}`;
+    case "javascript":
+    case "typescript":
+    case "typescriptreact":
+    case "javascriptreact":
+    default:
+      return `console.log(${JSON.stringify(selection)}, ${selection});`;
+  }
 }

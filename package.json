@@ -2,6 +2,11 @@
   "name": "print-it",
   "displayName": "Print It",
   "description": "Add a print statement for the current variable",
+  "publisher": "bmalehorn",
+  "license": "MIT",
+  "repository": {
+    "url": "https://github.com/bmalehorn/vscode-fish"
+  },
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.43.0"
@@ -10,25 +15,20 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:print-it.helloWorld",
-    "*"
+    "onCommand:print-it.PrintIt"
   ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "print-it.helloWorld",
-        "title": "Hello World"
-      },
-      {
-        "command": "print-it.nameValue",
-        "title": "print-it.nameValue"
+        "command": "print-it.PrintIt",
+        "title": "Print It"
       }
     ],
     "keybindings": [
       {
-        "command": "print-it.nameValue",
-        "key": "ctrl+shift+u",
+        "command": "print-it.PrintIt",
+        "key": "alt+[",
         "when": "editorTextFocus"
       }
     ]
