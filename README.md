@@ -13,12 +13,15 @@ Add print statements in one keystroke!
 
 ## Supported Languages
 
-| language                | example                                        |
-| ----------------------- | ---------------------------------------------- |
-| JavaScript / TypeScript | `console.log("variable", variable)`            |
-| Python                  | `print("variable", variable)`                  |
-| Ruby                    | `pp("variable", variable)`                     |
-| Go                      | `fmt.Printf("%s %#v\n", "variable", variable)` |
+| language                | example                                  |
+| ----------------------- | ---------------------------------------- |
+| JavaScript / TypeScript | `console.log("variable", variable)`      |
+| Python                  | `print("variable", variable)`            |
+| Ruby                    | `pp('variable', variable)`               |
+| Ruby (Erb)              | `<% pp('variable', variable) %>`         |
+| Go                      | `fmt.Printf("variable %#v\n", variable)` |
+| Bash                    | `echo 'ls -a' "$(ls -a)"`                |
+| Fish                    | `echo 'ls -a' (ls -a)`                   |
 
 ## Related Projects
 

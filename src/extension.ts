@@ -86,26 +86,35 @@ async function printIt() {
   currentEditor.selection = wrapData.sel;
 }
 
-// TODO: per-languages escape code, not JSON.stringify
 // TODO: configure wrapping function per-language
 function wrap(selection: string, languageId: string): string {
   switch (languageId) {
-    case "python":
-      return `print(${JSON.stringify(selection)}, ${selection})`;
-    case "go":
-      return `fmt.Printf("%s %#v\\n", ${JSON.stringify(
-        selection
-      )}, ${selection})`;
-    case "ruby":
-      return `pp(${JSON.stringify(selection)}, ${selection})`;
-    case "shellscript":
-    case "fish":
-      return `echo ${JSON.stringify(selection)} ${selection}`;
     case "javascript":
     case "typescript":
     case "typescriptreact":
     case "javascriptreact":
     default:
-      return `console.log(${JSON.stringify(selection)}, ${selection});`;
+      return `console.log("${selection.replace(/"/g, `\\"`)}", ${selection});`;
+
+    case "python":
+      return `print("${selection.replace(/"/g, `\\"`)}", ${selection})`;
+
+    case "ruby":
+      return `pp('${selection.replace(/'/g, `\\'`)}', ${selection})`;
+
+    case "erb":
+      return `<% pp('${selection.replace(/'/g, `\\'`)}', ${selection}) %>`;
+
+    case "go":
+      return `fmt.Printf("${selection.replace(
+        /"/g,
+        `\\"`
+      )} %#v\\n", ${selection})`;
+
+    case "shellscript":
+      return `echo '${selection.replace(/'/g, `'"'"'`)}' "$(${selection})"`;
+
+    case "fish":
+      return `echo '${selection.replace(/'/g, `\\'`)}' (${selection})`;
   }
 }
