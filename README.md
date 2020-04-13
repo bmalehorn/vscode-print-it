@@ -5,7 +5,7 @@
 
 Add print statements in one keystroke!
 
-`Alt + [`: wrap print statement
+`Option + [` / `Alt + [`: wrap print statement
 
 ## Demo
 
