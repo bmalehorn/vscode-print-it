@@ -15,7 +15,7 @@ Add print statements in one keystroke!
 
 | language                | example                                  |
 | ----------------------- | ---------------------------------------- |
-| JavaScript / TypeScript | `console.log("variable", variable)`      |
+| JavaScript / TypeScript | `console.log("variable", variable);`     |
 | Python                  | `print("variable", variable)`            |
 | Ruby                    | `pp('variable', variable)`               |
 | Ruby (Erb)              | `<% pp('variable', variable) %>`         |

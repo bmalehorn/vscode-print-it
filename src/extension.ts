@@ -86,7 +86,7 @@ async function printIt() {
   currentEditor.selection = wrapData.sel;
 }
 
-// TODO: configure wrapping function per-language
+// TODO: configure print function per-language
 function wrap(selection: string, languageId: string): string {
   switch (languageId) {
     case "javascript":
