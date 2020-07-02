@@ -1,4 +1,5 @@
 import * as vscode from "vscode";
+import { render } from "micromustache";
 
 interface WrapData {
   txt: string;
@@ -57,7 +58,19 @@ async function printIt() {
     sel,
     lastLine: doc.lineCount - 1 === lineNumber,
   };
-  wrapData.txt = wrap(wrapData.item, currentEditor.document.languageId);
+  const scope = {
+    escaped: escaped(wrapData.item, currentEditor.document.languageId),
+    raw: wrapData.item,
+  };
+  let template = vscode.workspace
+    .getConfiguration("print-it")
+    .get<string>(`${currentEditor.document.languageId}.template`);
+  if (!template) {
+    // fallback = javascript
+    template = 'console.log("{{escaped}}", {{raw}});';
+  }
+  wrapData.txt = render(template!, scope);
+
   let nxtLine: vscode.TextLine;
   let nxtLineInd: string;
 
@@ -86,35 +99,24 @@ async function printIt() {
   currentEditor.selection = wrapData.sel;
 }
 
-// TODO: configure print function per-language
-function wrap(selection: string, languageId: string): string {
+function escaped(selection: string, languageId: string): string {
   switch (languageId) {
     case "javascript":
     case "typescript":
     case "typescriptreact":
     case "javascriptreact":
-    default:
-      return `console.log("${selection.replace(/"/g, `\\"`)}", ${selection});`;
-
     case "python":
-      return `print("${selection.replace(/"/g, `\\"`)}", ${selection})`;
+    case "go":
+    case "fish":
+    // fallback = javascript
+    default:
+      return selection.replace(/"/g, `\\"`);
 
     case "ruby":
-      return `pp('${selection.replace(/'/g, `\\'`)}', ${selection})`;
-
     case "erb":
-      return `<% pp('${selection.replace(/'/g, `\\'`)}', ${selection}) %>`;
-
-    case "go":
-      return `fmt.Printf("${selection.replace(
-        /"/g,
-        `\\"`
-      )} %#v\\n", ${selection})`;
+      return selection.replace(/'/g, `\\'`);
 
     case "shellscript":
-      return `echo '${selection.replace(/'/g, `'"'"'`)}' "$(${selection})"`;
-
-    case "fish":
-      return `echo '${selection.replace(/'/g, `\\'`)}' (${selection})`;
+      return selection.replace(/'/g, `'"'"'`);
   }
 }

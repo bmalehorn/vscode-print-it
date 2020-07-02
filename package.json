@@ -7,7 +7,7 @@
   "repository": {
     "url": "https://github.com/bmalehorn/vscode-print-it"
   },
-  "version": "0.0.4",
+  "version": "0.1.0",
   "icon": "icon.png",
   "engines": {
     "vscode": "^1.43.0"
@@ -32,7 +32,61 @@
         "key": "alt+[",
         "when": "editorTextFocus"
       }
-    ]
+    ],
+    "configuration": {
+      "properties": {
+        "print-it.javascript.template": {
+          "type": "string",
+          "description": "Print statement to show in javascript files",
+          "default": "console.log(\"{{escaped}}\", {{raw}});"
+        },
+        "print-it.typescript.template": {
+          "type": "string",
+          "description": "Print statement to show in typescript files",
+          "default": "console.log(\"{{escaped}}\", {{raw}});"
+        },
+        "print-it.typescriptreact.template": {
+          "type": "string",
+          "description": "Print statement to show in typescriptreact files",
+          "default": "console.log(\"{{escaped}}\", {{raw}});"
+        },
+        "print-it.javascriptreact.template": {
+          "type": "string",
+          "description": "Print statement to show in javascriptreact files",
+          "default": "console.log(\"{{escaped}}\", {{raw}});"
+        },
+        "print-it.python.template": {
+          "type": "string",
+          "description": "Print statement to show in python files",
+          "default": "print(\"{{escaped}}\", raw)"
+        },
+        "print-it.ruby.template": {
+          "type": "string",
+          "description": "Print statement to show in ruby files",
+          "default": "pp('{{escaped}}', raw)"
+        },
+        "print-it.erb.template": {
+          "type": "string",
+          "description": "Print statement to show in erb files",
+          "default": "<% pp('{{escaped}}', raw) %>"
+        },
+        "print-it.go.template": {
+          "type": "string",
+          "description": "Print statement to show in go files",
+          "default": "fmt.Printf(\"{{escaped}} %#v\\n\", {{raw}})"
+        },
+        "print-it.shellscript.template": {
+          "type": "string",
+          "description": "Print statement to show in shellscript files",
+          "default": "echo \"{{escaped}} ${{raw}}\""
+        },
+        "print-it.fish.template": {
+          "type": "string",
+          "description": "Print statement to show in fish files",
+          "default": "echo \"{{escaped}} ${{raw}}\""
+        }
+      }
+    }
   },
   "scripts": {
     "vscode:prepublish": "yarn run compile",
@@ -54,12 +108,13 @@
     "husky": ">=4",
     "lint-staged": ">=10",
     "mocha": "^7.1.1",
+    "prettier": "^2.0.2",
+    "pretty-quick": "^2.0.1",
     "typescript": "^3.8.3",
     "vscode-test": "^1.3.0"
   },
   "dependencies": {
-    "prettier": "^2.0.2",
-    "pretty-quick": "^2.0.1"
+    "micromustache": "^7.1.0"
   },
   "husky": {
     "hooks": {

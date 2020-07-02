@@ -20,8 +20,31 @@ Add print statements in one keystroke!
 | Ruby                    | `pp('variable', variable)`               |
 | Ruby (Erb)              | `<% pp('variable', variable) %>`         |
 | Go                      | `fmt.Printf("variable %#v\n", variable)` |
-| Bash                    | `echo 'ls -a' "$(ls -a)"`                |
-| Fish                    | `echo 'ls -a' (ls -a)`                   |
+| Bash                    | `echo "variable $variable"`              |
+| Fish                    | `echo "variable $variable"`              |
+
+## Templating
+
+Want to change the default formatting? Set the configuration option `print-it.[language].template`:
+
+```jsonc
+  "print-it.javascriptreact.template": "console.log(\"The value of {{escaped}} is:\", {{raw}});"
+```
+
+This will make new print statements look like this:
+
+```jsx
+console.log("The value of variable is:", variable);
+```
+
+A full list of supported options available under the "Contributions" tab.
+
+The following variables are available:
+
+| variable      | example             | exaplanation                           |
+| ------------- | ------------------- | -------------------------------------- |
+| `{{raw}}`     | `"hello " + name`   | the current selection, or current word |
+| `{{escaped}}` | `\"hello \" + name` | `raw`, but escaped for use in a string |
 
 ## Related Projects
 

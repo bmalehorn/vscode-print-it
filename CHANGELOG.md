@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.1.0
+
+- Added configuration options `print-it.javascript.template`, `print-it.python.template`, etc.
+- Shellscript, Fish: changed default to print variable, not eval command
+
 ## 0.0.4
 
 - Python, Ruby, Go, Bash, Fish: improved quote escaping
