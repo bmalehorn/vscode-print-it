@@ -1,6 +1,10 @@
 # Change Log
 
-## 0.1.0
+## 0.1.1 (2020-07-02)
+
+- Python, Ruby, Erb: fix default template string causing "raw" to appear in output
+
+## 0.1.0 (2020-07-02)
 
 - Added configuration options `print-it.javascript.template`, `print-it.python.template`, etc.
 - Shellscript, Fish: changed default to print variable, not eval command

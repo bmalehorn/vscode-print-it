@@ -7,7 +7,7 @@
   "repository": {
     "url": "https://github.com/bmalehorn/vscode-print-it"
   },
-  "version": "0.1.0",
+  "version": "0.1.1",
   "icon": "icon.png",
   "engines": {
     "vscode": "^1.43.0"
@@ -58,17 +58,17 @@
         "print-it.python.template": {
           "type": "string",
           "description": "Print statement to show in python files",
-          "default": "print(\"{{escaped}}\", raw)"
+          "default": "print(\"{{escaped}}\", {{raw}})"
         },
         "print-it.ruby.template": {
           "type": "string",
           "description": "Print statement to show in ruby files",
-          "default": "pp('{{escaped}}', raw)"
+          "default": "pp('{{escaped}}', {{raw}})"
         },
         "print-it.erb.template": {
           "type": "string",
           "description": "Print statement to show in erb files",
-          "default": "<% pp('{{escaped}}', raw) %>"
+          "default": "<% pp('{{escaped}}', {{raw}}) %>"
         },
         "print-it.go.template": {
           "type": "string",

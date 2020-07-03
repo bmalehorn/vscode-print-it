@@ -1,2 +1,2 @@
 foo = 5
-pp('foo', raw)
+pp('foo', foo)
