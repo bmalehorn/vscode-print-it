@@ -22,6 +22,7 @@ export function activate(context: vscode.ExtensionContext) {
 }
 
 // this method is called when your extension is deactivated
+// eslint-disable-next-line @typescript-eslint/no-empty-function
 export function deactivate() {}
 
 async function printIt() {
@@ -29,11 +30,10 @@ async function printIt() {
   if (!currentEditor) {
     return;
   }
-  let sel = currentEditor.selection;
-  let len = sel.end.character - sel.start.character;
-  let wrapData: WrapData;
+  const sel = currentEditor.selection;
+  const len = sel.end.character - sel.start.character;
 
-  let ran =
+  const ran =
     len === 0
       ? currentEditor.document.getWordRangeAtPosition(sel.anchor)
       : new vscode.Range(sel.start, sel.end);
@@ -41,13 +41,13 @@ async function printIt() {
   if (ran === undefined) {
     throw new Error("NO_WORD");
   }
-  let doc = currentEditor.document;
-  let lineNumber = ran.start.line;
-  let item = doc.getText(ran);
+  const doc = currentEditor.document;
+  const lineNumber = ran.start.line;
+  const item = doc.getText(ran);
 
-  let idx = doc.lineAt(lineNumber).firstNonWhitespaceCharacterIndex;
-  let ind = doc.lineAt(lineNumber).text.substring(0, idx);
-  wrapData = {
+  const idx = doc.lineAt(lineNumber).firstNonWhitespaceCharacterIndex;
+  const ind = doc.lineAt(lineNumber).text.substring(0, idx);
+  const wrapData: WrapData = {
     txt: "",
     item,
     doc,
@@ -69,7 +69,7 @@ async function printIt() {
     // fallback = javascript
     template = 'console.log("{{escaped}}", {{raw}});';
   }
-  wrapData.txt = render(template!, scope);
+  wrapData.txt = render(template, scope);
 
   let nxtLine: vscode.TextLine;
   let nxtLineInd: string;
