@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.1.2 (2020-07-03)
+
+- Refactored
+
 ## 0.1.1 (2020-07-02)
 
 - Python, Ruby, Erb: fix default template string causing "raw" to appear in output
