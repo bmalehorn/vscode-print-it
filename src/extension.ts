@@ -1,18 +1,6 @@
 import * as vscode from "vscode";
 import { render } from "micromustache";
 
-interface WrapData {
-  txt: string;
-  item: string;
-  sel: vscode.Selection;
-  doc: vscode.TextDocument;
-  ran: vscode.Range;
-  ind: string;
-  idx: number;
-  line: number;
-  lastLine: boolean;
-}
-
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
@@ -47,20 +35,12 @@ async function printIt() {
 
   const idx = doc.lineAt(lineNumber).firstNonWhitespaceCharacterIndex;
   const ind = doc.lineAt(lineNumber).text.substring(0, idx);
-  const wrapData: WrapData = {
-    txt: "",
-    item,
-    doc,
-    ran,
-    idx,
-    ind,
-    line: lineNumber,
-    sel,
-    lastLine: doc.lineCount - 1 === lineNumber,
-  };
+  const line = lineNumber;
+  const lastLine = doc.lineCount - 1 === lineNumber;
+
   const scope = {
-    escaped: escaped(wrapData.item, currentEditor.document.languageId),
-    raw: wrapData.item,
+    escaped: escaped(item, currentEditor.document.languageId),
+    raw: item,
   };
   let template = vscode.workspace
     .getConfiguration("print-it")
@@ -69,13 +49,13 @@ async function printIt() {
     // fallback = javascript
     template = 'console.log("{{escaped}}", {{raw}});';
   }
-  wrapData.txt = render(template, scope);
+  const txt = render(template, scope);
 
   let nxtLine: vscode.TextLine;
   let nxtLineInd: string;
 
-  if (!wrapData.lastLine) {
-    nxtLine = wrapData.doc.lineAt(wrapData.line + 1);
+  if (!lastLine) {
+    nxtLine = doc.lineAt(line + 1);
     nxtLineInd = nxtLine.text.substring(
       0,
       nxtLine.firstNonWhitespaceCharacterIndex
@@ -85,18 +65,12 @@ async function printIt() {
   }
   await currentEditor.edit((e) => {
     e.insert(
-      new vscode.Position(
-        wrapData.line,
-        wrapData.doc.lineAt(wrapData.line).range.end.character
-      ),
-      "\n".concat(
-        nxtLineInd > wrapData.ind ? nxtLineInd : wrapData.ind,
-        wrapData.txt
-      )
+      new vscode.Position(line, doc.lineAt(line).range.end.character),
+      "\n".concat(nxtLineInd > ind ? nxtLineInd : ind, txt)
     );
   });
 
-  currentEditor.selection = wrapData.sel;
+  currentEditor.selection = sel;
 }
 
 function escaped(selection: string, languageId: string): string {
