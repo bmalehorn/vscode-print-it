@@ -21,17 +21,17 @@ async function printIt() {
   const sel = currentEditor.selection;
   const len = sel.end.character - sel.start.character;
 
-  const ran =
+  const range =
     len === 0
       ? currentEditor.document.getWordRangeAtPosition(sel.anchor)
       : new vscode.Range(sel.start, sel.end);
 
-  if (ran === undefined) {
+  if (range === undefined) {
     throw new Error("NO_WORD");
   }
   const doc = currentEditor.document;
-  const lineNumber = ran.start.line;
-  const item = doc.getText(ran);
+  const lineNumber = range.start.line;
+  const item = doc.getText(range);
 
   const idx = doc.lineAt(lineNumber).firstNonWhitespaceCharacterIndex;
   const ind = doc.lineAt(lineNumber).text.substring(0, idx);
