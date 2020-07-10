@@ -3,3 +3,9 @@ node_modules
 .vscode-test/
 *.vsix
 .eslintcache
+/sample
+*.class
+*.jar
+sample-cs/*
+!sample-cs/Program.cs
+!sample-cs/sample-cs.csproj

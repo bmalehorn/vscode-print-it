@@ -7,7 +7,7 @@
   "repository": {
     "url": "https://github.com/bmalehorn/vscode-print-it"
   },
-  "version": "0.1.2",
+  "version": "0.1.3",
   "icon": "icon.png",
   "engines": {
     "vscode": "^1.43.0"
@@ -55,6 +55,16 @@
           "description": "Print statement to show in javascriptreact files",
           "default": "console.log(\"{{escaped}}\", {{raw}});"
         },
+        "print-it.vue.template": {
+          "type": "string",
+          "description": "Print statement to show in vue files",
+          "default": "console.log(\"{{escaped}}\", {{raw}});"
+        },
+        "print-it.dart.template": {
+          "type": "string",
+          "description": "Print statement to show in dart files",
+          "default": "print(\"{{escaped}} ${ {{raw}} }\");"
+        },
         "print-it.python.template": {
           "type": "string",
           "description": "Print statement to show in python files",
@@ -63,17 +73,52 @@
         "print-it.ruby.template": {
           "type": "string",
           "description": "Print statement to show in ruby files",
-          "default": "pp('{{escaped}}', {{raw}})"
+          "default": "pp(\"{{escaped}}\", {{raw}})"
+        },
+        "print-it.java.template": {
+          "type": "string",
+          "description": "Print statement to show in Java files",
+          "default": "System.out.format(\"{{escaped}} %s\\n\", {{raw}});"
+        },
+        "print-it.kotlin.template": {
+          "type": "string",
+          "description": "Print statement to show in Kotlin files",
+          "default": "System.out.format(\"{{escaped}} %s\\n\", {{raw}})"
+        },
+        "print-it.php.template": {
+          "type": "string",
+          "description": "Print statement to show in PHP files",
+          "default": "echo \"{{escaped}} \"; print_r({{raw}}); echo \"\\n\";"
         },
         "print-it.erb.template": {
           "type": "string",
           "description": "Print statement to show in erb files",
           "default": "<% pp('{{escaped}}', {{raw}}) %>"
         },
+        "print-it.csharp.template": {
+          "type": "string",
+          "description": "Print statement to show in C# files",
+          "default": "Console.WriteLine(\"{{escaped}} {0}\", {{raw}});"
+        },
+        "print-it.cpp.template": {
+          "type": "string",
+          "description": "Print statement to show in C++ files",
+          "default": "std::cout << \"{{escaped}} \" << {{raw}} << std::endl;"
+        },
         "print-it.go.template": {
           "type": "string",
           "description": "Print statement to show in go files",
           "default": "fmt.Printf(\"{{escaped}} %#v\\n\", {{raw}})"
+        },
+        "print-it.rust.template": {
+          "type": "string",
+          "description": "Print statement to show in rust files",
+          "default": "println!(\"{{escaped}} {:?}\", {{raw}});"
+        },
+        "print-it.elixir.template": {
+          "type": "string",
+          "description": "Print statement to show in elixir files",
+          "default": "IO.puts \"{{escaped}} \" <> inspect({{raw}})"
         },
         "print-it.shellscript.template": {
           "type": "string",

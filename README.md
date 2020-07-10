@@ -13,15 +13,25 @@ Add print statements in one keystroke!
 
 ## Supported Languages
 
-| language                | example                                  |
-| ----------------------- | ---------------------------------------- |
-| JavaScript / TypeScript | `console.log("variable", variable);`     |
-| Python                  | `print("variable", variable)`            |
-| Ruby                    | `pp('variable', variable)`               |
-| Ruby (Erb)              | `<% pp('variable', variable) %>`         |
-| Go                      | `fmt.Printf("variable %#v\n", variable)` |
-| Bash                    | `echo "variable $variable"`              |
-| Fish                    | `echo "variable $variable"`              |
+| language   | example                                              |
+| ---------- | ---------------------------------------------------- |
+| JavaScript | `console.log("variable", variable);`                 |
+| Python     | `print("variable", variable)`                        |
+| Java       | `System.out.format("variable %s\n", variable);`      |
+| Bash       | `echo "variable $variable"`                          |
+| C#         | `Console.WriteLine("variable {0}", variable);`       |
+| PHP        | `echo "\$variable "; print_r($variable); echo "\n";` |
+| C++        | `std::cout << "variable " << variable << std::endl;` |
+| TypeScript | `console.log("variable", variable);`                 |
+| Ruby       | `pp('variable', variable)`                           |
+| Go         | `fmt.Printf("variable %#v\n", variable)`             |
+| Rust       | `println!(\"variable {:?}\", raw);`                  |
+| React      | `console.log("variable", variable);`                 |
+| Vue        | `console.log("variable", variable);`                 |
+| Dart       | `print("variable = ${variable}");`                   |
+| Kotlin     | `System.out.format("variable %s\n", variable)`       |
+| Elixir     | `IO.puts "variable " <> inspect(variable)`           |
+| Fish       | `echo "variable $variable"`                          |
 
 ## Templating
 

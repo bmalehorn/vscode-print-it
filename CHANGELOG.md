@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.1.3 (2020-07-10)
+
+- Vue, Rust, Dart, C++, PHP, Java, Kotlin, C#, Elixir: added support
+- Ruby: Now `pp "variable"` instead of `pp 'variable'` for consistency
+
 ## 0.1.2 (2020-07-03)
 
 - Refactored

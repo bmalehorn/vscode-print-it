@@ -10,7 +10,7 @@ export function activate(context: vscode.ExtensionContext) {
 }
 
 // this method is called when your extension is deactivated
-// eslint-disable-next-line @typescript-eslint/no-empty-function
+// eslint-disable-next-line
 export function deactivate() {}
 
 async function printIt() {
@@ -75,20 +75,17 @@ async function printIt() {
 
 function escaped(selection: string, languageId: string): string {
   switch (languageId) {
-    case "javascript":
-    case "typescript":
-    case "typescriptreact":
-    case "javascriptreact":
-    case "python":
-    case "go":
-    case "fish":
     // fallback = javascript
     default:
       return selection.replace(/"/g, `\\"`);
 
     case "ruby":
     case "erb":
-      return selection.replace(/'/g, `\\'`);
+    case "elixir":
+      return selection.replace(/"/g, `\\"`).replace(/#/g, "\\#");
+
+    case "php":
+      return selection.replace(/"/g, `\\"`).replace(/\$/g, "\\$");
 
     case "shellscript":
       return selection.replace(/'/g, `'"'"'`);
