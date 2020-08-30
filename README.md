@@ -47,7 +47,7 @@ This will make new print statements look like this:
 console.log("The value of variable is:", variable);
 ```
 
-A full list of supported options available under the "Contributions" tab.
+A full list of supported options is available under the "Contributions" tab.
 
 The following variables are available:
 
@@ -55,6 +55,12 @@ The following variables are available:
 | ------------- | ------------------- | -------------------------------------- |
 | `{{raw}}`     | `"hello " + name`   | the current selection, or current word |
 | `{{escaped}}` | `\"hello \" + name` | `raw`, but escaped for use in a string |
+
+For all other languages, you can set the value of `print-it.default.template`:
+
+```jsonc
+  "print-it.default.template": "printf(\"{{escaped}} %s\\n\", {{raw}});"
+```
 
 ## Related Projects
 

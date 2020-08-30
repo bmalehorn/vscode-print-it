@@ -1,8 +1,9 @@
-#include <stdio.h>
 #include <iostream>
+#include <stdio.h>
 #include <string>
 
 int main() {
+
   std::string s = "foo";
   std::cout << "s " << s << std::endl;
   int x = 5;

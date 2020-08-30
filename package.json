@@ -7,7 +7,7 @@
   "repository": {
     "url": "https://github.com/bmalehorn/vscode-print-it"
   },
-  "version": "0.1.3",
+  "version": "0.1.4",
   "icon": "icon.png",
   "engines": {
     "vscode": "^1.43.0"
@@ -35,6 +35,11 @@
     ],
     "configuration": {
       "properties": {
+        "print-it.default.template": {
+          "type": "string",
+          "description": "Print statement to show for all other files",
+          "default": "console.log(\"{{escaped}}\", {{raw}});"
+        },
         "print-it.javascript.template": {
           "type": "string",
           "description": "Print statement to show in javascript files",

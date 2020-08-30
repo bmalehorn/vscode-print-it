@@ -46,6 +46,11 @@ async function printIt() {
     .getConfiguration("print-it")
     .get<string>(`${currentEditor.document.languageId}.template`);
   if (!template) {
+    template = vscode.workspace
+      .getConfiguration("print-it")
+      .get<string>("default.template");
+  }
+  if (!template) {
     // fallback = javascript
     template = 'console.log("{{escaped}}", {{raw}});';
   }

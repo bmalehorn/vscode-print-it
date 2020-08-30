@@ -4,3 +4,7 @@ function f
 end
 
 foo --bar --ack
+
+foo && bar (ack | quux zux)
+foo @@@
+bar

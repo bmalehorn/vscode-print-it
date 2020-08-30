@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.1.4 (2020-08-30)
+
+- Add `print-it.default.template` for all other languages
+
 ## 0.1.3 (2020-07-10)
 
 - Vue, Rust, Dart, C++, PHP, Java, Kotlin, C#, Elixir: added support
