@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.1.5 (2021-06-08)
+
+- Update demo.gif for Mac
+- Reorder supported languages
+
 ## 0.1.4 (2020-08-30)
 
 - Add `print-it.default.template` for all other languages

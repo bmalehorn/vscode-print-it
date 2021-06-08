@@ -5,7 +5,7 @@
 
 Add print statements in one keystroke!
 
-`Option + [` / `Alt + [`: wrap print statement
+`⌥` `[`, `Alt` `[`: wrap print statement
 
 ## Demo
 
@@ -16,21 +16,21 @@ Add print statements in one keystroke!
 | language   | example                                              |
 | ---------- | ---------------------------------------------------- |
 | JavaScript | `console.log("variable", variable);`                 |
-| Python     | `print("variable", variable)`                        |
-| Java       | `System.out.format("variable %s\n", variable);`      |
-| Bash       | `echo "variable $variable"`                          |
-| C#         | `Console.WriteLine("variable {0}", variable);`       |
-| PHP        | `echo "\$variable "; print_r($variable); echo "\n";` |
-| C++        | `std::cout << "variable " << variable << std::endl;` |
 | TypeScript | `console.log("variable", variable);`                 |
-| Ruby       | `pp('variable', variable)`                           |
-| Go         | `fmt.Printf("variable %#v\n", variable)`             |
-| Rust       | `println!(\"variable {:?}\", raw);`                  |
 | React      | `console.log("variable", variable);`                 |
 | Vue        | `console.log("variable", variable);`                 |
+| Python     | `print("variable", variable)`                        |
+| Go         | `fmt.Printf("variable %#v\n", variable)`             |
+| Ruby       | `pp('variable', variable)`                           |
+| Java       | `System.out.format("variable %s\n", variable);`      |
+| PHP        | `echo "\$variable "; print_r($variable); echo "\n";` |
+| C#         | `Console.WriteLine("variable {0}", variable);`       |
+| C++        | `std::cout << "variable " << variable << std::endl;` |
+| Rust       | `println!(\"variable {:?}\", raw);`                  |
 | Dart       | `print("variable = ${variable}");`                   |
 | Kotlin     | `System.out.format("variable %s\n", variable)`       |
 | Elixir     | `IO.puts "variable " <> inspect(variable)`           |
+| Bash       | `echo "variable $variable"`                          |
 | Fish       | `echo "variable $variable"`                          |
 
 ## Templating
