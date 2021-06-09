@@ -54,6 +54,11 @@ async function printIt() {
     // fallback = javascript
     template = 'console.log("{{escaped}}", {{raw}});';
   }
+  if (vscode.workspace
+    .getConfiguration("print-it")
+    .get<boolean>("addSemicolonInTheEnd")) {
+      template = template.replace("{{escaped}}", "{{escaped}}:");
+  } 
   const txt = render(template, scope);
 
   let nxtLine: vscode.TextLine;

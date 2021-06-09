@@ -134,6 +134,11 @@
           "type": "string",
           "description": "Print statement to show in fish files",
           "default": "echo \"{{escaped}} ${{raw}}\""
+        },
+        "print-it.addSemicolonInTheEnd": {
+          "type": "boolean",
+          "description": "Whether to add or not a semicolon in the end of the log message",
+          "default": true
         }
       }
     }
