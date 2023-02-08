@@ -1,7 +1,7 @@
 # VSCode Print It
 
-[![version number](https://vsmarketplacebadge.apphb.com/version-short/bmalehorn.print-it.svg)](https://marketplace.visualstudio.com/items?itemName=bmalehorn.print-it)
-[![install count](https://vsmarketplacebadge.apphb.com/installs-short/bmalehorn.print-it.svg)](https://marketplace.visualstudio.com/items?itemName=bmalehorn.print-it)
+[![version number](https://img.shields.io/visual-studio-marketplace/v/bmalehorn.print-it)](https://marketplace.visualstudio.com/items?itemName=bmalehorn.print-it)
+[![install count](https://img.shields.io/visual-studio-marketplace/i/bmalehorn.print-it)](https://marketplace.visualstudio.com/items?itemName=bmalehorn.print-it)
 
 Add print statements in one keystroke!
 
