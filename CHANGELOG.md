@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.1.6 (2023-02-17)
+
+- Update badge URLs
+- Fix launch.json for debugging this extension
+
 ## 0.1.5 (2021-06-08)
 
 - Update demo.gif for Mac
