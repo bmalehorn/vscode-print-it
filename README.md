@@ -19,6 +19,7 @@ Add print statements in one keystroke!
 | TypeScript | `console.log("variable", variable);`                 |
 | React      | `console.log("variable", variable);`                 |
 | Vue        | `console.log("variable", variable);`                 |
+| HTML       | `console.log("variable", variable);`                 |
 | Python     | `print("variable", variable)`                        |
 | Go         | `fmt.Printf("variable %#v\n", variable)`             |
 | Ruby       | `pp('variable', variable)`                           |

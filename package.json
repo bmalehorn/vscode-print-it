@@ -7,7 +7,7 @@
   "repository": {
     "url": "https://github.com/bmalehorn/vscode-print-it"
   },
-  "version": "0.1.6",
+  "version": "0.1.7",
   "icon": "icon.png",
   "engines": {
     "vscode": "^1.43.0"
@@ -15,9 +15,7 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [
-    "onCommand:print-it.PrintIt"
-  ],
+  "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
@@ -63,6 +61,11 @@
         "print-it.vue.template": {
           "type": "string",
           "description": "Print statement to show in vue files",
+          "default": "console.log(\"{{escaped}}\", {{raw}});"
+        },
+        "print-it.html.template": {
+          "type": "string",
+          "description": "Print statement to show in html files",
           "default": "console.log(\"{{escaped}}\", {{raw}});"
         },
         "print-it.dart.template": {

@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.1.7 (2023-10-03)
+
+- Add `print-it.html.template` option, which uses javascript syntax
+
 ## 0.1.6 (2023-02-17)
 
 - Update badge URLs
