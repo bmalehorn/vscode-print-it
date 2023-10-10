@@ -1360,11 +1360,6 @@ micromatch@^4.0.2:
     braces "^3.0.1"
     picomatch "^2.0.5"
 
-micromustache@^7.1.0:
-  version "7.1.0"
-  resolved "https://registry.yarnpkg.com/micromustache/-/micromustache-7.1.0.tgz#53eebe9a4fe0ac9b9990535e090f797e2934d5e1"
-  integrity sha512-DXUYQI8qPsfOx3AkiGzyOx0cn7NgCqFYsV0Asa/ZQUna2Er4mwpAdA9iANA92WYvUowHf+jBsVvIZxiRe1z1Ig==
-
 mimic-fn@^1.0.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/mimic-fn/-/mimic-fn-1.2.0.tgz#820c86a39334640e99516928bd03fca88057d022"

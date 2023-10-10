@@ -1,5 +1,4 @@
 import * as vscode from "vscode";
-import { render } from "micromustache";
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -78,7 +77,7 @@ async function printIt() {
   currentEditor.selection = sel;
 }
 
-function escaped(selection: string, languageId: string): string {
+export function escaped(selection: string, languageId: string): string {
   switch (languageId) {
     // fallback = javascript
     default:
@@ -95,4 +94,13 @@ function escaped(selection: string, languageId: string): string {
     case "shellscript":
       return selection.replace(/'/g, `'"'"'`);
   }
+}
+
+export function render(
+  template: string,
+  scope: { raw: string; escaped: string }
+): string {
+  return template
+    .replace(/{{raw}}/g, scope.raw)
+    .replace(/{{escaped}}/g, scope.escaped);
 }

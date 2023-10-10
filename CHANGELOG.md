@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.1.8 (2023-10-10)
+
+- Fix #7, #11: Rendering a string like `{{{raw}}}` would confuse the formatter, and there was no way to escape `{` and `}` as a workaround. Fix this by replacing the formatter with a simple find-and-replace of the strings `{{raw}}` and `{{escaped}}`.
+
 ## 0.1.7 (2023-10-03)
 
 - Add `print-it.html.template` option, which uses javascript syntax
