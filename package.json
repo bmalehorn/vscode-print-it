@@ -7,7 +7,7 @@
   "repository": {
     "url": "https://github.com/bmalehorn/vscode-print-it"
   },
-  "version": "0.1.8",
+  "version": "0.1.9",
   "icon": "icon.png",
   "engines": {
     "vscode": "^1.43.0"

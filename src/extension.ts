@@ -30,7 +30,7 @@ async function printIt() {
   }
   const doc = currentEditor.document;
   const lineNumber = range.start.line;
-  const item = doc.getText(range);
+  const item = doc.getText(range).trim();
 
   const idx = doc.lineAt(lineNumber).firstNonWhitespaceCharacterIndex;
   const ind = doc.lineAt(lineNumber).text.substring(0, idx);
