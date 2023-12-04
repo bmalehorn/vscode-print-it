@@ -78,6 +78,11 @@
           "description": "Print statement to show in python files",
           "default": "print(\"{{escaped}}\", {{raw}})"
         },
+        "print-it.mojo.template": {
+          "type": "string",
+          "description": "Print statement to show in python files",
+          "default": "print(\"{{escaped}}\", {{raw}})"
+        },
         "print-it.ruby.template": {
           "type": "string",
           "description": "Print statement to show in ruby files",
