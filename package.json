@@ -80,7 +80,7 @@
         },
         "print-it.mojo.template": {
           "type": "string",
-          "description": "Print statement to show in python files",
+          "description": "Print statement to show in mojo files",
           "default": "print(\"{{escaped}}\", {{raw}})"
         },
         "print-it.ruby.template": {
