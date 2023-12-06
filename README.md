@@ -21,6 +21,7 @@ Add print statements in one keystroke!
 | Vue        | `console.log("variable", variable);`                 |
 | HTML       | `console.log("variable", variable);`                 |
 | Python     | `print("variable", variable)`                        |
+| Mojo       | `print("variable", variable)`                        |
 | Go         | `fmt.Printf("variable %#v\n", variable)`             |
 | Ruby       | `pp('variable', variable)`                           |
 | Java       | `System.out.format("variable %s\n", variable);`      |
